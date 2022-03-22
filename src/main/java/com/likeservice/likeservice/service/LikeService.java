@@ -8,11 +8,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+import java.time.LocalDateTime;
+
 @Service
 public class LikeService {
 
     @Autowired
     private LikeRepo likeRepo;
+    public Like createLike(Like like, String postOrCommentId){
+        like.setPostOrCommentId(postOrCommentId);
+        like.setCreatedAt(LocalDateTime.now());
+        return this.likeRepo.save(like);
+
+    }
 
 
     public List<Like> getLikesPage(String postorcommentId, int page, int pageSize){
