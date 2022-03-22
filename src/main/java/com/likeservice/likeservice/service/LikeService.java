@@ -14,11 +14,17 @@ public class LikeService {
     @Autowired
     private LikeRepo likeRepo;
 
+
     public List<Like> getLikesPage(String postorcommentId, int page, int pageSize){
         Pageable firstPage = PageRequest.of(page, pageSize);
         List<Like> allLikes=likeRepo.findBypostorcommentID(postorcommentId , (java.awt.print.Pageable) firstPage);
         return  allLikes;
 
+    }
+
+
+    public Like likeDetailsOnID(String likeId){
+        return likeRepo.findById(likeId).get();
     }
 
 }
