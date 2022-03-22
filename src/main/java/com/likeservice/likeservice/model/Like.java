@@ -18,7 +18,7 @@ public class Like {
     private String likeID;
     @NotEmpty(message = "user ID is required")
     private String userID;
-    private String postOrCommentId;
+    private String postorcommentID;
     private String likedBy;
     private LocalDateTime createdAt;
 
