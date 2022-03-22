@@ -9,14 +9,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.ws.rs.QueryParam;
+import java.util.List;
+
 @RestController
 public class LikeController {
 
     @Autowired
     private LikeService likeService;
 
+
+    @GetMapping("/postsOrComments/{postOrCommentId}/likes")
+    public  ResponseEntity<List<Like>> getLikesPage(@PathVariable("postOrCommentId") String postOrCommentId, @QueryParam("page") int page, @QueryParam("pageSize") int pageSize){
+        return new ResponseEntity<>(likeService.getLikesPage(postOrCommentId,page,pageSize), HttpStatus.ACCEPTED);
+    }
     @GetMapping("/postsOrComments/{postOrCommentId}/likes/{likeId}")
     public ResponseEntity<Like> likeDetailsOnID(@PathVariable("likeId") String likeId, @PathVariable("postOrCommentId") String postOrCommentId){
         return new ResponseEntity<>(likeService.likeDetailsOnID(likeId), HttpStatus.ACCEPTED);
+
     }
 }
