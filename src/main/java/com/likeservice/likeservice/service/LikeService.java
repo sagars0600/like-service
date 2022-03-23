@@ -2,6 +2,7 @@ package com.likeservice.likeservice.service;
 
 import com.likeservice.likeservice.model.Like;
 import com.likeservice.likeservice.repo.LikeRepo;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,8 +16,8 @@ public class LikeService {
 
     @Autowired
     private LikeRepo likeRepo;
-    public Like createLike(Like like, String postOrCommentId){
-        like.setPostOrCommentId(postOrCommentId);
+    public Like createLike(@NotNull Like like, String postorcommentId){
+        like.setPostorcommentID(postorcommentId);
         like.setCreatedAt(LocalDateTime.now());
         return this.likeRepo.save(like);
 
