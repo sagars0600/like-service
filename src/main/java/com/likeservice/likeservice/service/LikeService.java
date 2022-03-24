@@ -1,5 +1,6 @@
 package com.likeservice.likeservice.service;
 
+import com.likeservice.likeservice.exception.LikeNotFoundException;
 import com.likeservice.likeservice.feign.FeignUser;
 import com.likeservice.likeservice.model.Like;
 import com.likeservice.likeservice.model.LikeDto;
@@ -54,8 +55,11 @@ public class LikeService {
 
 
     public Like likeDetailsOnID(String likeId){
-        return
-                likeRepo.findById(likeId).get();
+        if(likeRepo.findById(likeId).get()==null){
+            throw  new LikeNotFoundException("Not found");
+        }
+        return likeRepo.findById(likeId).get();
+
     }
 
     public String deleteLike(String likeId){
