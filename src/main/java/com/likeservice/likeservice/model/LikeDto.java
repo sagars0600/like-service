@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.apache.catalina.User;
+
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotEmpty;
