@@ -1,5 +1,6 @@
 package com.likeservice.likeservice.service;
 
+import com.likeservice.likeservice.constfiles.ConstFile;
 import com.likeservice.likeservice.exception.LikeNotFoundException;
 import com.likeservice.likeservice.feign.FeignUser;
 import com.likeservice.likeservice.model.Like;
@@ -27,12 +28,7 @@ public class LikeService {
     @Autowired
     private FeignUser feignUser;
 
-    public Like createLike(@NotNull Like like, String postorcommentId){
-        like.setPostorcommentID(postorcommentId);
-        like.setCreatedAt(LocalDateTime.now());
-        return this.likeRepo.save(like);
 
-    }
 
     public List<LikeDto> likesPage(String postOrCommentId,Integer page, Integer pageSize){
         if(page==null){
@@ -57,17 +53,25 @@ public class LikeService {
     }
 
 
-    public Like likeDetailsOnID(String likeId){
-        if(likeRepo.findById(likeId).get()==null){
+    public LikeDto likeDetailsOnID(String likeId){
+        if(likeRepo.findById(likeId).isPresent()){
+            Like like=likeRepo.findById(likeId).get();
+
+            LikeDto likeDTO =new LikeDto(like.getLikeID(),like.getPostorcommentID(),
+                    feignUser.findByID(like.getLikedBy()),like.getCreatedAt());
+            return likeDTO;
+        }
+        else{
             throw  new LikeNotFoundException("Not found");
         }
-        return likeRepo.findById(likeId).get();
+
 
     }
 
     public String deleteLike(String likeId){
+
         likeRepo.deleteById(likeId);
-        return "Deleted likeId "+likeId+" successfully";
+       throw  new LikeNotFoundException(ConstFile.delete);
     }
     public int countLikes(String postOrCommentId){
         List<Like> allData=likeRepo.findAll();

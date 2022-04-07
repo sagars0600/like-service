@@ -1,5 +1,6 @@
 package com.likeservice.likeservice.model;
 
+import com.likeservice.likeservice.constfiles.ConstFile;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ public class Like {
     @Id
     private String likeID;
 
-
+@NotEmpty(message=ConstFile.postorcommentID)
     private String postorcommentID;
     private String likedBy;
     private LocalDateTime createdAt;
