@@ -6,18 +6,12 @@ import com.likeservice.likeservice.feign.FeignUser;
 import com.likeservice.likeservice.model.Like;
 import com.likeservice.likeservice.model.LikeDto;
 import com.likeservice.likeservice.repo.LikeRepo;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.time.LocalDateTime;
 
 @Service
