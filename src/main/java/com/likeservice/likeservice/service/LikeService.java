@@ -65,8 +65,10 @@ public class LikeService {
     public String deleteLike(String likeId){
 
         likeRepo.deleteById(likeId);
-       throw  new LikeNotFoundException(ConstFile.delete);
+        return  ConstFile.delete;
+
     }
+
     public int countLikes(String postOrCommentId){
         List<Like> allData=likeRepo.findAll();
         int count=0;
